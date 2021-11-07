@@ -17,7 +17,7 @@ export default function Login({ navigation }) {
                 signInWithEmailAndPassword(auth, email, password)
                     .then((userCredential) => {
                         console.log(userCredential);
-                        navigation.nvaigate("User");
+                        navigation.navigate("User");
                     }).catch((error) => { 
                         console.log(error.code)
                         console.log(error.message)

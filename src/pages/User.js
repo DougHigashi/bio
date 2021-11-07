@@ -1,9 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { Alert, View, Text, StyleSheet } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 export default function User({ navigation }) {
     const [isMounted, setMounted] = useState(false);
+
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            // User is signed in, see docs for a list of available properties
+            // https://firebase.google.com/docs/reference/js/firebase.User
+            const uid = user.uid;
+            // ...
+        } else {
+            // User is signed out
+            // ...
+        }
+    });
 
     useEffect(() => {
         setMounted(true);
@@ -29,7 +43,7 @@ export default function User({ navigation }) {
     return (
         <View style={styles.container}>
             <AntDesign style={styles.logo} name="user" size={124} color="white" />
-            <Text style={styles.text}>User</Text>
+            <Text style={styles.text}>{auth.currentUser.email}</Text>
         </View>
     );
 }
