@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Alert, View, Text, StyleSheet } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { signOut } from "firebase/auth";
+import { auth } from "../../config/firebase"
 
 export default function User({ navigation }) {
     const [isMounted, setMounted] = useState(false);
 
-    const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
         if (user) {
             // User is signed in, see docs for a list of available properties
@@ -31,7 +32,17 @@ export default function User({ navigation }) {
                 },
                 {
                     text: 'Ok',
-                    onPress: () => { setMounted(false); navigation.dispatch(e.data.action); navigation.navigate('Login') }
+                    onPress: () => {
+                        setMounted(false);
+                        navigation.dispatch(e.data.action);
+                        navigation.navigate('Login');
+                        signOut(auth).then(() => {
+                            console.log("Logged off")
+                          }).catch((error) => {
+                            // An error happened.
+                          });
+                          
+                    }
                     //Depois de clicar em Ok ele libera a ação de voltar
                     //e realiza o logout
                 }

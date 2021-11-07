@@ -4,9 +4,9 @@ import { StyleSheet, Text, TouchableOpacity, View, TextInput, ToastAndroid, Aler
 import { Ionicons } from '@expo/vector-icons';
 import { getAuth, signInWithEmailAndPassword  } from "firebase/auth";
 import * as LocalAuthentication from 'expo-local-authentication';
+import { auth } from "../../config/firebase"
 
 export default function Login({ navigation }) {
-    const auth = getAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
