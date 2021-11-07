@@ -1,12 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { Alert, View, Text, StyleSheet } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 import { signOut } from "firebase/auth";
 import { auth } from "../../config/firebase"
 
 export default function User({ navigation }) {
     const [isMounted, setMounted] = useState(false);
+
+
+    const logoff = () => {
+        signOut(auth).then(() => {
+            console.log("Logged off")
+          }).catch((error) => {
+            // An error happened.
+          });
+          
+    }
 
     onAuthStateChanged(auth, (user) => {
         if (user) {
@@ -35,13 +45,8 @@ export default function User({ navigation }) {
                     onPress: () => {
                         setMounted(false);
                         navigation.dispatch(e.data.action);
+                        logoff();
                         navigation.navigate('Login');
-                        signOut(auth).then(() => {
-                            console.log("Logged off")
-                          }).catch((error) => {
-                            // An error happened.
-                          });
-                          
                     }
                     //Depois de clicar em Ok ele libera a ação de voltar
                     //e realiza o logout
@@ -69,7 +74,7 @@ const styles = StyleSheet.create({
         color: "#fff",
         marginTop: 90,
         marginBottom: 50,
-        fontSize: 30,
+        fontSize: 20,
         fontFamily: "sans-serif-thin"
     },
     logo: {
