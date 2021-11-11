@@ -60,12 +60,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     textTop: {
-        textAlign: "center",
-        color: "#fff",
-        marginTop: 90,
-        marginBottom: 50,
-        fontSize: 30,
-        fontFamily: "sans-serif-thin"
+        
     },
     logo: {
         alignItems: "center",

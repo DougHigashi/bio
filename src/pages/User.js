@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Alert, View, Text, StyleSheet } from 'react-native';
+import { Alert, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { onAuthStateChanged } from "firebase/auth";
 import { signOut } from "firebase/auth";
@@ -29,6 +29,32 @@ export default function User({ navigation }) {
             // ...
         }
     });
+
+    const deletar = () => {
+        Alert.alert(
+            "Deletar",
+            "Tem certeza que deseja deletar o usuario?",
+            [
+                {
+                    text: "Não",
+                },
+                {
+                    text: "Sim",
+                    onPress: () => {
+                        let user = auth?.currentUser;                    
+                        user.delete()
+                            .then(() => {
+                                Alert.alert('Deletado com sucesso')
+                                navigation.replace('Tabs')
+                            })
+                            .catch((error) => {
+                                Alert.alert('Ops!', error)
+                            });
+                    },
+                },
+            ]
+        )
+    }
 
     useEffect(() => {
         setMounted(true);
@@ -60,6 +86,9 @@ export default function User({ navigation }) {
         <View style={styles.container}>
             <AntDesign style={styles.logo} name="user" size={124} color="white" />
             <Text style={styles.text}>{auth.currentUser.email}</Text>
+            <TouchableOpacity onPress={() => { deletar() }} style={styles.botao}>
+                <Text style={styles.textobotao}>Deletar Conta</Text>
+            </TouchableOpacity>
         </View>
     );
 }
@@ -68,6 +97,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#000',
+    },
+    textobotao: {
+        color: 'white'
     },
     text: {
         textAlign: "center",
