@@ -1,22 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Alert, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { db, auth } from "../../config/firebase";
+import { collection, documentId, getDocs } from '@firebase/firestore';
 export default function Info({ navigation }) {
-
 
     const id = auth?.currentUser?.uid;
 
-    const verifyPermition = () => {
-     db.collection('levelUsers').doc(id).get().then((doc) => {
-        if (doc.exists) {
-            console.log("Document data:", doc.data());
-        } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
-        }
-    }).catch((error) => {
-        console.log("Error getting document:", error);
-    });
+    async function getList(datab) {
+        const col = collection(datab, 'levelUsers');
+        const snapshot = await getDocs(col);
+        const list = snapshot.docs.map(doc => doc.data());
+        return list;
+      }
+
+     const verifyPermition = () => {
+        console.log(getList(db));
     }
 
     return (
