@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Alert, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { db, auth } from "../../config/firebase";
 import { collection, documentId, getDocs } from '@firebase/firestore';
+
 export default function Info({ navigation }) {
 
-    const id = auth?.currentUser?.uid;
+    const id = auth.currentUser.email;
 
     async function getList(datab) {
         const col = collection(datab, 'levelUsers');
@@ -19,6 +20,7 @@ export default function Info({ navigation }) {
 
     return (
         <View style={styles.container}>
+            <Text style={styles.texto}>{id}</Text>
             <Text style = {styles.texto}>Informações:</Text>
             <TouchableOpacity onPress={() => {verifyPermition()}}style={styles.button}>
                 <Text style={styles.texto}>Produção Agrícola</Text>
@@ -40,8 +42,8 @@ const styles = StyleSheet.create({
     }, texto: {
         textAlign: "center",
         color: "#fff",
-        marginTop: 90,
-        marginBottom: 50,
+        marginTop: '25%',
+        marginBottom: '5%',
         fontSize: 30,
         fontFamily: "sans-serif-thin"
     },  button: {

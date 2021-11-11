@@ -3,7 +3,6 @@ import React from 'react';
 import { LogBox, StyleSheet, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createMaterialBottomTabNavigator } from 'react-navigation-tabs';
 
 import Login from './src/pages/Login.js';
 import Cadastro from './src/pages/Cadastro.js';
