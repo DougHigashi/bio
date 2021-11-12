@@ -1,33 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import { Alert, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { db, auth } from "../../config/firebase";
-import { collection, documentId, getDoc } from '@firebase/firestore';
+import { db, auth, app } from "../../config/firebase";
+import { getFirestore, doc, getDoc } from 'firebase/firestore';
 
 export default function Info({ navigation }) {
 
-    const id = auth?.currentUser?.uid;
+    const id = auth.currentUser.uid;
 
-    async function getList(datab) {
-        const col = collection(datab, 'levelUsers', id);
+    const database = getFirestore(app)
+
+    async function getList(database) {
+        const col = doc(database, 'levelUsers/' + id)
         const snapshot = await getDoc(col);
         const list = snapshot.data();
-        return list;
-      }
-
-     const verifyPermition = () => {
-        console.log(getList(db));
+        console.log(list)
     }
 
     return (
         <View style={styles.container}>
             <Text style = {styles.texto}>Informações:</Text>
-            <TouchableOpacity onPress={() => {verifyPermition()}}style={styles.button}>
+            <TouchableOpacity onPress={() => {getList(database)}}style={styles.button}>
                 <Text style={styles.texto}>Produção Agrícola</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => {verifyPermition()}}style={styles.button}>
+            <TouchableOpacity onPress={() => {getList()}}style={styles.button}>
                 <Text style={styles.texto}>Informações Fiscais</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => {verifyPermition()}}style={styles.button}>
+            <TouchableOpacity onPress={() => {getList()}}style={styles.button}>
                 <Text style={styles.texto}>Agrotóxicos</Text>
             </TouchableOpacity>
         </View>
