@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Alert, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { db, auth } from "../../config/firebase";
-import { collection, documentId, getDocs } from '@firebase/firestore';
+import { collection, documentId, getDoc } from '@firebase/firestore';
 
 export default function Info({ navigation }) {
 
-    const id = auth.currentUser.email;
+    const id = auth?.currentUser?.uid;
 
     async function getList(datab) {
-        const col = collection(datab, 'levelUsers');
-        const snapshot = await getDocs(col);
-        const list = snapshot.docs.map(doc => doc.data());
+        const col = collection(datab, 'levelUsers', id);
+        const snapshot = await getDoc(col);
+        const list = snapshot.data();
         return list;
       }
 
@@ -20,7 +20,6 @@ export default function Info({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.texto}>{id}</Text>
             <Text style = {styles.texto}>Informações:</Text>
             <TouchableOpacity onPress={() => {verifyPermition()}}style={styles.button}>
                 <Text style={styles.texto}>Produção Agrícola</Text>
