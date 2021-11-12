@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Alert, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { db, auth, app } from "../../config/firebase";
+import { auth, app } from "../../config/firebase";
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 
 export default function Info({ navigation }) {
@@ -9,23 +9,74 @@ export default function Info({ navigation }) {
 
     const database = getFirestore(app)
 
-    async function getList(database) {
+    async function getList(infoNivel) {
         const col = doc(database, 'levelUsers/' + id)
         const snapshot = await getDoc(col);
         const list = snapshot.data();
-        console.log(list)
+        try{
+        if(list.Nivel === '3'){
+            console.log(infoNivel)
+            switch (infoNivel){
+                 case 'N1':
+                    navigation.navigate("InfoNivel1");
+                    break;
+                 case 'N2':
+                    navigation.navigate("InfoNivel2");
+                    break;
+                 case 'N3':
+                    navigation.navigate("InfoNivel3");
+                    break;
+            }
+        }
+        else if (list.Nivel === '2'){
+            switch (infoNivel){
+                 case 'N1':
+                     navigation.navigate("InfoNivel1");
+                     break;
+                 case 'N2':
+                     navigation.navigate("InfoNivel2");
+                     break;
+               default:
+                 Alert.alert('OPS!','Usuario sem permisão!')
+                 break;
+            }
+        } else if (list.Nivel === '1'){
+            switch (infoNivel){
+                case 'N1':
+                    navigation.navigate("InfoNivel1");
+                    break;
+              default:
+                Alert.alert('OPS!','Usuario sem permisão!')
+                break;
+           }
+        }}catch(error){
+            switch(error.code){
+                case undefined:
+                    switch (infoNivel){
+                        case 'N1':
+                            navigation.navigate("InfoNivel1");
+                            break;
+                      default:
+                        Alert.alert('OPS!','Usuario sem permisão!')
+                        break;
+                   }
+                default:
+                    break;
+            }
+        }
     }
+    
 
     return (
         <View style={styles.container}>
             <Text style = {styles.texto}>Informações:</Text>
-            <TouchableOpacity onPress={() => {getList(database)}}style={styles.button}>
+            <TouchableOpacity onPress={() => {getList('N1')}}style={styles.button}>
                 <Text style={styles.texto}>Produção Agrícola</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => {getList()}}style={styles.button}>
+            <TouchableOpacity onPress={() => {getList('N2')}}style={styles.button}>
                 <Text style={styles.texto}>Informações Fiscais</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => {getList()}}style={styles.button}>
+            <TouchableOpacity onPress={() => {getList('N3')}}style={styles.button}>
                 <Text style={styles.texto}>Agrotóxicos</Text>
             </TouchableOpacity>
         </View>
