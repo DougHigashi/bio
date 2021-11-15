@@ -13,8 +13,9 @@ export default function Info({ navigation }) {
         const col = doc(database, 'levelUsers/' + id)
         const snapshot = await getDoc(col);
         const list = snapshot.data();
+        console.log(list)
         try{
-        if(list.Nivel === '3'){
+        if(list.Nível === 3){
             console.log(infoNivel)
             switch (infoNivel){
                  case 'N1':
@@ -28,7 +29,7 @@ export default function Info({ navigation }) {
                     break;
             }
         }
-        else if (list.Nivel === '2'){
+        else if (list.Nível === 2){
             switch (infoNivel){
                  case 'N1':
                      navigation.navigate("InfoNivel1");
@@ -40,7 +41,7 @@ export default function Info({ navigation }) {
                  Alert.alert('OPS!','Usuario sem permisão!')
                  break;
             }
-        } else if (list.Nivel === '1'){
+        } else if (list.Nível === 1){
             switch (infoNivel){
                 case 'N1':
                     navigation.navigate("InfoNivel1");

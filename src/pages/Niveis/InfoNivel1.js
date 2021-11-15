@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Alert, View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import { auth, app } from "../../../config/firebase";
 import { getFirestore, doc, getDoc} from 'firebase/firestore';
 
@@ -7,8 +7,10 @@ export default function InfoNivel1({ navigation }) {
 
     const database = getFirestore(app)
 
+    const id = auth.currentUser.uid;
+
     async function getList() {
-        const col = doc(database, 'Nivel1/')
+        const col = doc(database, 'Nivel1/' + id)
         const snapshot = await getDoc(col);
         const list = snapshot.data();
         console.log(list)

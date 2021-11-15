@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Alert, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { auth, app } from "../../../config/firebase";
-import { getFirestore, doc, getDoc } from 'firebase/firestore';
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import { app } from "../../../config/firebase";
+import { getFirestore, doc, getDoc} from 'firebase/firestore';
 
 export default function InfoNivel2({ navigation }) {
 
