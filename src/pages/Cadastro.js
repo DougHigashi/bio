@@ -13,8 +13,7 @@ export default function Cadastro({ navigation }) {
     const authenticate = () => {
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                console.log(userCredential.user);
-                navigation.navigate("User");
+                navigation.navigate("Info");
                 ToastAndroid.show("Cadastrado com sucesso", ToastAndroid.LONG)
             }).catch((error) => {
                 switch (error.code) {

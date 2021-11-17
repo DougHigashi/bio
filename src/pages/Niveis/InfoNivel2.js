@@ -1,16 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { Alert, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { Alert, View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import { auth, app } from "../../../config/firebase";
-import { getFirestore, doc, getDoc } from 'firebase/firestore';
+import { getFirestore, collection, query, onSnapshot, limit} from 'firebase/firestore';
 
 export default function InfoNivel2({ navigation }) {
 
-    const database = getFirestore(app)
+    const database = getFirestore()
 
     async function getList() {
-        const col = doc(database, 'levelUsers/Nivel2')
-        const snapshot = await getDoc(col);
-        const list = snapshot.data();
+        const queryForDocuments = query(collection(database, 'Nivel2'), limit(200))
+        onSnapshot(queryForDocuments, (queryS) => 
+        {
+          queryS.forEach((snap) => 
+          {
+              console.log(snap.data())
+          })  
+        })
     }
 
     return (

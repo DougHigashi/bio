@@ -1,28 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import { Alert, View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import { auth, app } from "../../../config/firebase";
-import { getFirestore, doc, getDoc} from 'firebase/firestore';
+import { View, Text, StyleSheet, FlatList} from 'react-native';
+import { getFirestore, collection, query, onSnapshot, limit} from 'firebase/firestore';
 
 export default function InfoNivel1({ navigation }) {
 
-    const database = getFirestore(app)
+    const [documents, setDocuments] = useState([]);
+    const database = getFirestore()
 
-    async function getList() {
-        const col = doc(database, 'Nivel1/')
-        const snapshot = await getDoc(col);
-        const list = snapshot.data();
-        console.log(list)
-    }
+    useEffect(() => {
+        const queryForDocuments = query(collection(database, 'Nivel1'), limit(200))
+        onSnapshot(queryForDocuments, (queryS) => 
+        {
+          queryS.forEach((snap) => 
+          {
+              documents.push(snap.data())
+          })
+        })
+      },[]);
 
     return (
         <View style={styles.container}>
             <Text style = {styles.texto}>Produção Agrícola</Text>
-            <TouchableOpacity onPress={() => {getList()}}style={styles.button}>
-                <Text style={styles.texto}>print</Text>
-            </TouchableOpacity>
+            <FlatList data = {documents} renderItem ={({item}) => { return <Text>{item}</Text>}} keyExtractor= {(item) => {item.id}}></FlatList>
         </View>
     );
 }
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -34,7 +37,15 @@ const styles = StyleSheet.create({
         marginBottom: '5%',
         fontSize: 30,
         fontFamily: "sans-serif-thin"
-    },  button: {
-        
-    }
+    }, item: {
+        backgroundColor: '#f9c2ff',
+        height: 150,
+        justifyContent: 'center',
+        marginVertical: 8,
+        marginHorizontal: 16,
+        padding: 20,
+      },
+      title: {
+        fontSize: 32,
+      }
 });
