@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, FlatList} from 'react-native';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
 import { getFirestore, collection, query, onSnapshot, limit} from 'firebase/firestore';
 
 export default function InfoNivel1({ navigation }) {
@@ -7,21 +7,42 @@ export default function InfoNivel1({ navigation }) {
     const [documents, setDocuments] = useState([]);
     const database = getFirestore()
 
-    useEffect(() => {
-        const queryForDocuments = query(collection(database, 'Nivel1'), limit(200))
-        onSnapshot(queryForDocuments, (queryS) => 
+     useEffect(() => {
+      const queryForDocuments = query(collection(database, 'Nivel1'), limit(200))
+      onSnapshot(queryForDocuments, (queryS) => 
+      {
+        const list =[];
+        queryS.forEach((doc) => 
         {
-          queryS.forEach((snap) => 
-          {
-              documents.push(snap.data())
-          })
-        })
-      },[]);
+          list.push({ ...doc.data(), id: doc.id });
+        })  
+        setDocuments(list)
+      });
+       console.log(documents)
+    },[]);
+
+    function getItem(itemList) {
+      console.log(itemList)
+      return (
+        <FlatList
+            data = {itemList}
+            renderItem={({ item }) => 
+              <Text style={styles.item}>{item.produto}</Text>}
+        />
+      );
+    }
 
     return (
         <View style={styles.container}>
             <Text style = {styles.texto}>Produção Agrícola</Text>
-            <FlatList data = {documents} renderItem ={({item}) => { return <Text>{item}</Text>}} keyExtractor= {(item) => {item.id}}></FlatList>
+            <FlatList
+                data={documents}
+                renderItem={({ item }) => 
+                <TouchableOpacity onPress={() => {getItem(item)}}>
+                  <Text style={styles.item}>{item.nome}</Text>
+                </TouchableOpacity>
+                }
+            />
         </View>
     );
 }

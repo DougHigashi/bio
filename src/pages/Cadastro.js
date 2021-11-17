@@ -41,7 +41,7 @@ export default function Cadastro({ navigation }) {
             <TextInput style={styles.input} placeholder="Email" onChangeText={email => setEmail(email)} value={email} />
             <TextInput style={styles.input} secureTextEntry={true} placeholder="Senha" onChangeText={password => setPassword(password)} value={password} />
 
-            <TouchableOpacity style={styles.button} onPress={() => { authenticate(); console.log(email) }}>
+            <TouchableOpacity style={styles.button} onPress={() => { authenticate()}}>
                 <AntDesign name="login" size={24} color="black" />
             </TouchableOpacity>
             <StatusBar style="inverted" />
