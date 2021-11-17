@@ -1,6 +1,7 @@
 import React from 'react';
 import { Alert, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { auth, app } from "../../config/firebase";
+import { AntDesign } from '@expo/vector-icons';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 
 export default function Info({ navigation }) {
@@ -66,19 +67,24 @@ export default function Info({ navigation }) {
             }
         }
     }
-    
+    const perfil = () => {
+        navigation.navigate("User");
+    }
 
     return (
         <View style={styles.container}>
             <Text style = {styles.texto}>Informações:</Text>
-            <TouchableOpacity onPress={() => {getList('N1')}}style={styles.button}>
+            <TouchableOpacity onPress={() => {getList('N1')}}>
                 <Text style={styles.texto}>Produção Agrícola</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => {getList('N2')}}style={styles.button}>
+            <TouchableOpacity onPress={() => {getList('N2')}}>
                 <Text style={styles.texto}>Informações Fiscais</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => {getList('N3')}}style={styles.button}>
+            <TouchableOpacity onPress={() => {getList('N3')}}>
                 <Text style={styles.texto}>Agrotóxicos</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={() => { perfil()}}>
+                <AntDesign name="user" size={24} color="black" />
             </TouchableOpacity>
         </View>
     );
@@ -96,6 +102,9 @@ const styles = StyleSheet.create({
         fontSize: 30,
         fontFamily: "sans-serif-thin"
     },  button: {
-        
+        alignItems: "center",
+        backgroundColor: "#DDDDDD",
+        padding: 10,
+        borderRadius: 30
     }
 });

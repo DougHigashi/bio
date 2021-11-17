@@ -20,27 +20,24 @@ export default function InfoNivel1({ navigation }) {
       });
        console.log(documents)
     },[]);
-
-    function getItem(itemList) {
-      console.log(itemList)
-      return (
-        <FlatList
-            data = {itemList}
-            renderItem={({ item }) => 
-              <Text style={styles.item}>{item.produto}</Text>}
-        />
-      );
-    }
-
+    
     return (
         <View style={styles.container}>
             <Text style = {styles.texto}>Produção Agrícola</Text>
             <FlatList
                 data={documents}
                 renderItem={({ item }) => 
-                <TouchableOpacity onPress={() => {getItem(item)}}>
-                  <Text style={styles.item}>{item.nome}</Text>
-                </TouchableOpacity>
+                <View>
+                  <Text style={styles.item}>{"Nome: " + item.nome}</Text>
+                  <Text style={styles.item}>{"Produto: " + item.produto}</Text>
+                  <Text style={styles.item}>{"Destino: " + item.destino}</Text>
+                  <Text style={styles.item}>{"Produção anual: " + item.producaoAnual}</Text>
+                  <Text style={styles.item}>{"Endereço: " + item.endereco}</Text>
+                  <Text style={styles.item}>{"Nivel Automação: " + item.nivelAuto}</Text>
+                  <Text style={styles.item}>{"Numero de Empregados: " + item.numeroEm}</Text>
+                  <Text style={styles.item}>{"Quantidade de Maquinas: " + item.quantMaquinas}</Text>
+                  <Text style={styles.item}>-----------------------------------------------------------</Text>
+                  </View>
                 }
             />
         </View>
@@ -59,12 +56,13 @@ const styles = StyleSheet.create({
         fontSize: 30,
         fontFamily: "sans-serif-thin"
     }, item: {
-        backgroundColor: '#f9c2ff',
-        height: 150,
+        backgroundColor: '#000',
+        color: '#fff',
+        height: 50,
         justifyContent: 'center',
-        marginVertical: 8,
-        marginHorizontal: 16,
-        padding: 20,
+        marginVertical: 5,
+        marginHorizontal: 10,
+        padding: 10,
       },
       title: {
         fontSize: 32,
