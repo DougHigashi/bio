@@ -15,7 +15,7 @@ import InfoNivel3 from './src/pages/Niveis/InfoNivel3.js'
 LogBox.ignoreLogs(["Setting a timer", "AsyncStorage has been extracted from react-native core and will be removed in a future release."]);
 
 export default function App() {
-  
+
 
   const Stack = createNativeStackNavigator();
 
