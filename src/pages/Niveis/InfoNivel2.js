@@ -28,11 +28,11 @@ export default function InfoNivel2({ navigation }) {
           <View>
             <Text style={styles.itemTitle}> Empresa  {index + 1}</Text>
             <Text style={styles.item}>{"Nome: " + item.nome}</Text>
-            <Text style={styles.item}>{"Incentivos Fiscais Recebidos: " + item.incentivos}</Text>
-            <Text style={styles.item}>{"Impostos Municipais Pagos: " + item.impostosMunicipais}</Text>
-            <Text style={styles.item}>{"Impostos Estaduais Recolhidos: " + item.impostosEstaduais}</Text>
-            <Text style={styles.item}>{"Impostos Federais Pagos: " + item.impostosFederais}</Text>
-            <Text style={styles.item}>{"Taxas Federais Pagas: " + item.taxasFedeais}</Text>
+            <Text style={styles.item}>{"Incentivos Fiscais Recebidos: " + "R$" + item.incentivoFiscal}</Text>
+            <Text style={styles.item}>{"Impostos Municipais Pagos: " + "R$" + item.impostoMunicipal}</Text>
+            <Text style={styles.item}>{"Impostos Estaduais Recolhidos: " + "R$" + item.impostoEstadual}</Text>
+            <Text style={styles.item}>{"Impostos Federais Pagos: " + "R$" + item.impostoFederal}</Text>
+            <Text style={styles.item}>{"Taxas Federais Pagas: " + "R$" + item.taxasFederais}</Text>
             <Text style={styles.item}>_____________________________________________________</Text>
           </View>
         }
@@ -46,7 +46,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#000',
   }, texto: {
-    textAlign: "center",
+    textAlign: "left",
+    marginHorizontal: 10,
     color: "#fff",
     marginTop: '25%',
     marginBottom: '5%',
@@ -60,6 +61,7 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     marginHorizontal: 10,
     padding: 10,
+    fontFamily: "sans-serif-thin"
   },
   itemTitle: {
     backgroundColor: '#000',

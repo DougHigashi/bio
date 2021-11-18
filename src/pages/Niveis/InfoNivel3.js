@@ -28,7 +28,7 @@ export default function InfoNivel3({ navigation }) {
           <View>
             <Text style={styles.itemTitle}> Empresa  {index + 1}</Text>
             <Text style={styles.item}>{"Nome: " + item.nome}</Text>
-            <Text style={styles.item}>{"Agrotóxicos Empregados nas Produções Agrícolas: " + item.agrotoxicos}</Text>
+            <Text style={styles.item}>{"Agrotóxicos Usados: " + item.agrotoxico}</Text>
             <Text style={styles.item}>_____________________________________________________</Text>
           </View>
         }
@@ -42,7 +42,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#000',
   }, texto: {
-    textAlign: "center",
+    textAlign: "left",
+    marginHorizontal: 10,
     color: "#fff",
     marginTop: '25%',
     marginBottom: '5%',
@@ -56,6 +57,7 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     marginHorizontal: 10,
     padding: 10,
+    fontFamily: "sans-serif-thin"
   },
   itemTitle: {
     backgroundColor: '#000',

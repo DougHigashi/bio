@@ -48,7 +48,8 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#000',
     }, texto: {
-        textAlign: "center",
+        textAlign: "left",
+        marginHorizontal: 10,
         color: "#fff",
         marginTop: '25%',
         marginBottom: '5%',

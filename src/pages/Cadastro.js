@@ -59,6 +59,13 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     textTop: {
+        textAlign: "center",
+        marginHorizontal: 10,
+        color: "#fff",
+        marginTop: '25%',
+        marginBottom: '5%',
+        fontSize: 30,
+        fontFamily: "sans-serif-thin"
         
     },
     logo: {
