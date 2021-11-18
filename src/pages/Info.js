@@ -107,17 +107,17 @@ export default function Info({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.texto}>Informações:</Text>
-            <TouchableOpacity onPress={() => { getList('N1') }}>
+            <Text style={styles.textoTitle}>Informações:</Text>
+            <TouchableOpacity  onPress={() => { getList('N1') }}>
                 <Text style={styles.texto}>Produção Agrícola</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => { getList('N2') }}>
+            <TouchableOpacity  onPress={() => { getList('N2') }}>
                 <Text style={styles.texto}>Informações Fiscais</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => { getList('N3') }}>
+            <TouchableOpacity  onPress={() => { getList('N3') }}>
                 <Text style={styles.texto}>Agrotóxicos</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={() => { perfil() }}>
+            <TouchableOpacity style={styles.buttonUser} onPress={() => { perfil() }}>
                 <AntDesign name="user" size={24} color="black" />
             </TouchableOpacity>
         </View>
@@ -130,6 +130,19 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#000',
     }, texto: {
+        alignSelf: 'center',
+        textAlign: "center",
+        color: "#000",
+        marginTop: '15%',
+        marginBottom: '5%',
+        fontSize: 30,
+        fontFamily: "sans-serif-thin",
+        backgroundColor: '#DDDDDD',
+        borderRadius: 50,
+        width: 300,
+        padding: 15
+    },
+    textoTitle: {
         textAlign: "center",
         color: "#fff",
         marginTop: '25%',
@@ -137,6 +150,11 @@ const styles = StyleSheet.create({
         fontSize: 30,
         fontFamily: "sans-serif-thin"
     }, button: {
+        backgroundColor: 'white',
+        alignItems: 'center',
+        alignSelf: 'center',
+    },
+     buttonUser: {
         alignSelf: 'center',
         alignItems: "center",
         backgroundColor: "#DDDDDD",
