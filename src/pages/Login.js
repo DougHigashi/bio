@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, TextInput, ToastAndroid, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import * as LocalAuthentication from 'expo-local-authentication';
 import { auth } from "../../config/firebase"
 
@@ -15,8 +15,7 @@ export default function Login({ navigation }) {
         LocalAuthentication.authenticateAsync().then(result => {
             if (result.success) {
                 signInWithEmailAndPassword(auth, email, password)
-                    .then((userCredential) => {
-                        console.log(userCredential);
+                    .then(() => {
                         navigation.navigate("Info");
                     }).catch((error) => {
                         console.log(error.code)
@@ -37,7 +36,7 @@ export default function Login({ navigation }) {
                 <Ionicons name="finger-print" size={128} color="white" />
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => {navigation.navigate("Cadastro")}}>
+            <TouchableOpacity onPress={() => { navigation.navigate("Cadastro") }}>
                 <Text style={styles.textTop}>Cadastre-se</Text>
             </TouchableOpacity>
             <StatusBar style="inverted" />
